@@ -1,0 +1,109 @@
+#ifndef _MBLOCK_H_
+#define _MBLOCK_H_
+
+header_type mb_result_t {
+    fields {
+        r1 : 8;
+        r2 : 8;
+        //r3 : 8;
+        //r4 : 8;
+        //r5 : 8;
+        //r6 : 8;
+        //r7 : 8;
+        //r8 : 8;
+    }
+}
+
+metadata mb_result_t m11;
+metadata mb_result_t m12;
+metadata mb_result_t m13;
+metadata mb_result_t m14;
+//metadata mb_result_t m1_2;
+
+metadata mb_result_t m21;
+metadata mb_result_t m22;
+metadata mb_result_t m23;
+metadata mb_result_t m24;
+//metadata mb_result_t m2_2;
+
+action a_mb_s1_1() {
+    add(m11.r1, pktlen_onehot.p1, pktlen_onehot.p2);
+    subtract(m11.r2, pktlen_onehot.p3, pktlen_onehot.p4);
+
+    add(m12.r1, pktlen_onehot.p1, pktlen_onehot.p2);
+    subtract(m12.r2, pktlen_onehot.p3, pktlen_onehot.p4);
+
+    add(m13.r1, pktlen_onehot.p1, pktlen_onehot.p2);
+    subtract(m13.r2, pktlen_onehot.p3, pktlen_onehot.p4);
+
+    add(m14.r1, pktlen_onehot.p1, pktlen_onehot.p2);
+    subtract(m14.r2, pktlen_onehot.p3, pktlen_onehot.p4);
+}
+
+table t_mb_s1_1 {
+    actions {
+        a_mb_s1_1;
+    }
+    default_action : a_mb_s1_1;
+    size : 1;
+}
+
+action a_mb_s1_2() {
+    add(m21.r1, pktlen_onehot.p1, pktlen_onehot.p2);
+    subtract(m21.r2, pktlen_onehot.p3, pktlen_onehot.p4);
+
+    add(m22.r1, pktlen_onehot.p1, pktlen_onehot.p2);
+    subtract(m22.r2, pktlen_onehot.p3, pktlen_onehot.p4);
+
+    add(m23.r1, pktlen_onehot.p1, pktlen_onehot.p2);
+    subtract(m23.r2, pktlen_onehot.p3, pktlen_onehot.p4);
+
+    add(m24.r1, pktlen_onehot.p1, pktlen_onehot.p2);
+    subtract(m24.r2, pktlen_onehot.p3, pktlen_onehot.p4);
+}
+
+table t_mb_s1_2 {
+    actions {
+        a_mb_s1_2;
+    }
+    default_action : a_mb_s1_2;
+    size : 1;
+}
+
+action a_mb_s2_1() {
+    add_to_field(m11.r1, m11.r2);
+    add_to_field(m12.r1, m12.r2);
+    add_to_field(m13.r1, m13.r2);
+    add_to_field(m14.r1, m14.r2);
+}
+
+table t_mb_s2_1 {
+    actions {
+        a_mb_s2_1;
+    }
+    default_action : a_mb_s2_1;
+    size : 1;
+}
+action a_mb_s2_2() {
+    subtract_from_field(m21.r1, m21.r2);
+    subtract_from_field(m22.r1, m22.r2);
+    subtract_from_field(m23.r1, m23.r2);
+    subtract_from_field(m24.r1, m24.r2);
+}
+
+table t_mb_s2_2 {
+    actions {
+        a_mb_s2_2;
+    }
+    default_action : a_mb_s2_2;
+    size : 1;
+}
+control do_calc_mat {
+    apply(t_mb_s1_1);
+    apply(t_mb_s1_2);
+
+    //apply(t_mb_s2_1);
+    //apply(t_mb_s2_2);
+}
+
+#endif

@@ -1,0 +1,11 @@
+Build started at 2020-12-01T13:58:15.012729
+Main binary: /usr/bin/python3
+Build Options: 
+Python system: Linux
+The Meson build system
+Version: 0.56.0
+Source dir: /home/zhao/Downloads/dpdk-20.11/examples/ip_pipeline
+Build dir: /home/zhao/Downloads/dpdk-20.11/examples/ip_pipeline/build
+Build type: native build
+
+ERROR: First statement must be a call to project
